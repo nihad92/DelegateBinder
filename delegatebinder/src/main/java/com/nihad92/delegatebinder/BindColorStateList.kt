@@ -1,0 +1,30 @@
+package com.nihad92.delegatebinder
+
+import android.app.Activity
+import android.app.Dialog
+import android.app.Fragment
+import android.content.res.ColorStateList
+import android.support.annotation.ColorRes
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.RecyclerView
+import android.view.View
+import kotlin.reflect.KProperty
+import android.support.v4.app.Fragment as V4Fragment
+
+open class BindColorStateList(@ColorRes protected val id: Int) : BindLazy<ColorStateList>() {
+
+    override operator fun getValue(thisRef: Activity, property: KProperty<*>): ColorStateList {
+        createInitializer(thisRef, { ContextCompat.getColorStateList(thisRef, id)!! })
+        return value
+    }
+
+    override operator fun getValue(thisRef: View, property: KProperty<*>): ColorStateList {
+        createInitializer(thisRef, { ContextCompat.getColorStateList(thisRef.context, id)!! })
+        return value
+    }
+
+    override operator fun getValue(thisRef: Dialog, property: KProperty<*>): ColorStateList {
+        createInitializer(thisRef, { ContextCompat.getColorStateList(thisRef.context, id)!! })
+        return value
+    }
+}
