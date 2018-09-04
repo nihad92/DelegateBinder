@@ -9,6 +9,18 @@ import kotlin.reflect.KProperty
 import android.support.v4.app.Fragment as V4Fragment
 
 open class BindIntArray(@ArrayRes protected val id: Int) : BindLazy<IntArray>() {
+    override fun getValue(thisRef: Fragment, property: KProperty<*>): IntArray {
+        createInitializer(thisRef, { thisRef.resources.getIntArray(id) })
+        return value
+    }
+
+    override fun getValue(
+        thisRef: android.support.v4.app.Fragment,
+        property: KProperty<*>
+    ): IntArray {
+        createInitializer(thisRef, { thisRef.resources.getIntArray(id) })
+        return value
+    }
 
     override operator fun getValue(thisRef: Activity, property: KProperty<*>): IntArray {
         createInitializer(thisRef, { thisRef.resources.getIntArray(id) })

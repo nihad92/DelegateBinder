@@ -11,6 +11,18 @@ import kotlin.reflect.KProperty
 import android.support.v4.app.Fragment as V4Fragment
 
 open class BindDrawable(@DrawableRes protected val id: Int) : BindLazy<Drawable>() {
+    override fun getValue(
+        thisRef: android.support.v4.app.Fragment,
+        property: KProperty<*>
+    ): Drawable {
+        createInitializer(thisRef, { ContextCompat.getDrawable(thisRef.view!!.context, id)!! })
+        return value
+    }
+
+    override fun getValue(thisRef: Fragment, property: KProperty<*>): Drawable {
+        createInitializer(thisRef, { ContextCompat.getDrawable(thisRef.view.context, id)!! })
+        return value
+    }
 
     override operator fun getValue(thisRef: Activity, property: KProperty<*>): Drawable {
         createInitializer(thisRef, { ContextCompat.getDrawable(thisRef, id)!! })

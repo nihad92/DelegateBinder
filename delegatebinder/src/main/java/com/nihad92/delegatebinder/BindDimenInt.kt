@@ -12,6 +12,16 @@ import kotlin.reflect.KProperty
 import android.support.v4.app.Fragment as V4Fragment
 
 open class BindDimenInt(@DimenRes protected val id: Int) : BindLazy<Int>() {
+    override fun getValue(thisRef: Fragment, property: KProperty<*>): Int {
+        createInitializer(thisRef, { thisRef.resources.getDimensionPixelSize(id) })
+        return value
+    }
+
+    override fun getValue(thisRef: android.support.v4.app.Fragment, property: KProperty<*>): Int {
+        createInitializer(thisRef, { thisRef.resources.getDimensionPixelSize(id) })
+        return value
+    }
+
     override operator fun getValue(thisRef: Activity, property: KProperty<*>): Int {
         createInitializer(thisRef, { thisRef.resources.getDimensionPixelSize(id) })
         return value

@@ -34,6 +34,7 @@ internal class Subscriber<T>(private val clearValueAction: () -> Unit) : Observe
 
     override fun onNext(t: T) {
         clearValueAction.invoke()
+        disposable.dispose()
     }
 
     override fun onError(e: Throwable) {

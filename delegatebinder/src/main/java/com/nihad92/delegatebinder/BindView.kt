@@ -9,6 +9,15 @@ import kotlin.reflect.KProperty
 import android.support.v4.app.Fragment as V4Fragment
 
 open class BindView<T : View?>(@IdRes protected val id: Int) : BindLazy<T>() {
+    override fun getValue(thisRef: Fragment, property: KProperty<*>): T {
+        createInitializer(thisRef, { thisRef.view.findViewById<T>(id) })
+        return value
+    }
+
+    override fun getValue(thisRef: android.support.v4.app.Fragment, property: KProperty<*>): T {
+        createInitializer(thisRef, { thisRef.view!!.findViewById<T>(id) })
+        return value
+    }
 
     override operator fun getValue(thisRef: Activity, property: KProperty<*>): T {
         createInitializer(thisRef, { thisRef.findViewById<T>(id) })
