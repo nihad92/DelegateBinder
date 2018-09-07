@@ -1,4 +1,4 @@
-package com.nihad92.delegatebinder
+package com.nihad92.delegatebinder.viewbinding
 
 import android.app.Activity
 import android.app.Dialog
@@ -14,10 +14,7 @@ open class BindViews<T : View?>(@IdRes protected vararg val ids: Int) : BindLazy
         return value
     }
 
-    override fun getValue(
-        thisRef: android.support.v4.app.Fragment,
-        property: KProperty<*>
-    ): List<T> {
+    override fun getValue(thisRef: V4Fragment, property: KProperty<*>): List<T> {
         createInitializer(thisRef, { findViews(ids, { thisRef.view!!.findViewById<T>(it) }) })
         return value
     }

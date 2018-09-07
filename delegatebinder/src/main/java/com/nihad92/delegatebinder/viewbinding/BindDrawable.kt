@@ -1,4 +1,4 @@
-package com.nihad92.delegatebinder
+package com.nihad92.delegatebinder.viewbinding
 
 import android.app.Activity
 import android.app.Dialog
@@ -11,10 +11,7 @@ import kotlin.reflect.KProperty
 import android.support.v4.app.Fragment as V4Fragment
 
 open class BindDrawable(@DrawableRes protected val id: Int) : BindLazy<Drawable>() {
-    override fun getValue(
-        thisRef: android.support.v4.app.Fragment,
-        property: KProperty<*>
-    ): Drawable {
+    override fun getValue(thisRef: V4Fragment, property: KProperty<*>): Drawable {
         createInitializer(thisRef, { ContextCompat.getDrawable(thisRef.view!!.context, id)!! })
         return value
     }

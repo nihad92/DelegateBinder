@@ -1,20 +1,15 @@
-package com.nihad92.delegatebinder
+package com.nihad92.delegatebinder.viewbinding
 
 import android.app.Activity
 import android.app.Dialog
 import android.app.Fragment
 import android.support.annotation.BoolRes
-import android.support.annotation.StringRes
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import kotlin.reflect.KProperty
 import android.support.v4.app.Fragment as V4Fragment
 
 open class BindBool(@BoolRes protected val id: Int) : BindLazy<Boolean>() {
-    override fun getValue(
-        thisRef: android.support.v4.app.Fragment,
-        property: KProperty<*>
-    ): Boolean {
+    override fun getValue(thisRef: V4Fragment, property: KProperty<*>): Boolean {
         createInitializer(thisRef, { thisRef.resources.getBoolean(id) })
         return value
     }

@@ -1,4 +1,4 @@
-package com.nihad92.delegatebinder
+package com.nihad92.delegatebinder.viewbinding
 
 import android.app.Activity
 import android.app.Dialog
@@ -16,10 +16,7 @@ open class BindBitmap(@DrawableRes protected val id: Int) : BindLazy<Bitmap>() {
         return value
     }
 
-    override fun getValue(
-        thisRef: android.support.v4.app.Fragment,
-        property: KProperty<*>
-    ): Bitmap {
+    override fun getValue(thisRef: V4Fragment, property: KProperty<*>): Bitmap {
         createInitializer(thisRef, { BitmapFactory.decodeResource(thisRef.resources, id) })
         return value
     }
