@@ -1,4 +1,4 @@
-package com.nihad92.delegatebinder
+package com.nihad92.delegatebinder.viewbinding
 
 import android.app.Activity
 import android.app.Dialog
@@ -6,7 +6,6 @@ import android.app.Fragment
 import android.content.res.ColorStateList
 import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import kotlin.reflect.KProperty
 import android.support.v4.app.Fragment as V4Fragment
@@ -17,10 +16,7 @@ open class BindColorStateList(@ColorRes protected val id: Int) : BindLazy<ColorS
         return value
     }
 
-    override fun getValue(
-        thisRef: android.support.v4.app.Fragment,
-        property: KProperty<*>
-    ): ColorStateList {
+    override fun getValue(thisRef: V4Fragment, property: KProperty<*>): ColorStateList {
         createInitializer(thisRef, { ContextCompat.getColorStateList(thisRef.view!!.context, id)!! })
         return value
     }

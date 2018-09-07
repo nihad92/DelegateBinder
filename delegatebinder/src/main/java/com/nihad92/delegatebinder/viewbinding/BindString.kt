@@ -1,4 +1,4 @@
-package com.nihad92.delegatebinder
+package com.nihad92.delegatebinder.viewbinding
 
 import android.app.Activity
 import android.app.Dialog
@@ -14,10 +14,7 @@ open class BindString(@StringRes protected val id: Int) : BindLazy<String>() {
         return value
     }
 
-    override fun getValue(
-        thisRef: android.support.v4.app.Fragment,
-        property: KProperty<*>
-    ): String {
+    override fun getValue(thisRef: V4Fragment, property: KProperty<*>): String {
         createInitializer(thisRef, { thisRef.resources.getString(id) })
         return value
     }
