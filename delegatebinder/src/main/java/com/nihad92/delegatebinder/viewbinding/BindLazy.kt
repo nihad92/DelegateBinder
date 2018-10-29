@@ -12,24 +12,22 @@ abstract class BindLazy<T> : Lazy<T>, Bind<T> {
             if (_value == UNINITIALIZED) {
                 _value = initializer.invoke()
             }
-            @Suppress("UNCHECKED_CAST")
-            return _value as T
+            @Suppress("UNCHECKED_CAST") return _value as T
         }
 
     override fun isInitialized(): Boolean = _value != UNINITIALIZED
 
-    protected fun createInitializer(thisRef: Any, valueInitializer: () -> T) {
+    protected fun createInitializer(thisRef: Any,
+                                    valueInitializer: () -> T) {
         if (!::initializer.isInitialized) {
             initializer = {
-                Unbinder.with(thisRef).subscribe(
-                    Subscriber(
-                        { _value = UNINITIALIZED }))
                 valueInitializer.invoke()
             }
         }
     }
 
-    override operator fun getValue(thisRef: RecyclerView.ViewHolder, property: KProperty<*>): T {
+    override operator fun getValue(thisRef: RecyclerView.ViewHolder,
+                                   property: KProperty<*>): T {
         return this.getValue(thisRef.itemView, property)
     }
 
