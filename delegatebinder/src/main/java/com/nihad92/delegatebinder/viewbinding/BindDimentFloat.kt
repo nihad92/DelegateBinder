@@ -8,29 +8,24 @@ import android.view.View
 import kotlin.reflect.KProperty
 import android.support.v4.app.Fragment as V4Fragment
 
-open class BindDimentFloat(@DimenRes protected val id: Int) : BindLazy<Float>() {
+open class BindDimentFloat(@DimenRes protected val id: Int) : Binder<Float>() {
     override fun getValue(thisRef: Fragment, property: KProperty<*>): Float {
-        createInitializer(thisRef, { thisRef.resources.getDimension(id) })
-        return value
+        return thisRef.resources.getDimension(id)
     }
 
     override fun getValue(thisRef: V4Fragment, property: KProperty<*>): Float {
-        createInitializer(thisRef, { thisRef.resources.getDimension(id) })
-        return value
+        return thisRef.resources.getDimension(id)
     }
 
     override operator fun getValue(thisRef: Activity, property: KProperty<*>): Float {
-        createInitializer(thisRef, { thisRef.resources.getDimension(id) })
-        return value
+        return thisRef.resources.getDimension(id)
     }
 
     override operator fun getValue(thisRef: View, property: KProperty<*>): Float {
-        createInitializer(thisRef, { thisRef.resources.getDimension(id) })
-        return value
+        return thisRef.resources.getDimension(id)
     }
 
     override operator fun getValue(thisRef: Dialog, property: KProperty<*>): Float {
-        createInitializer(thisRef, { thisRef.context.resources.getDimension(id) })
-        return value
+        return thisRef.context.resources.getDimension(id)
     }
 }
