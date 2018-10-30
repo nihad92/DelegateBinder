@@ -8,29 +8,24 @@ import android.view.View
 import kotlin.reflect.KProperty
 import android.support.v4.app.Fragment as V4Fragment
 
-open class BindDimenInt(@DimenRes protected val id: Int) : BindLazy<Int>() {
+open class BindDimenInt(@DimenRes protected val id: Int) : Binder<Int>() {
     override fun getValue(thisRef: Fragment, property: KProperty<*>): Int {
-        createInitializer(thisRef, { thisRef.resources.getDimensionPixelSize(id) })
-        return value
+        return thisRef.resources.getDimensionPixelSize(id)
     }
 
     override fun getValue(thisRef: V4Fragment, property: KProperty<*>): Int {
-        createInitializer(thisRef, { thisRef.resources.getDimensionPixelSize(id) })
-        return value
+        return thisRef.resources.getDimensionPixelSize(id)
     }
 
     override operator fun getValue(thisRef: Activity, property: KProperty<*>): Int {
-        createInitializer(thisRef, { thisRef.resources.getDimensionPixelSize(id) })
-        return value
+        return thisRef.resources.getDimensionPixelSize(id)
     }
 
     override operator fun getValue(thisRef: View, property: KProperty<*>): Int {
-        createInitializer(thisRef, { thisRef.resources.getDimensionPixelSize(id) })
-        return value
+        return thisRef.resources.getDimensionPixelSize(id)
     }
 
     override operator fun getValue(thisRef: Dialog, property: KProperty<*>): Int {
-        createInitializer(thisRef, { thisRef.context.resources.getDimensionPixelSize(id) })
-        return value
+        return thisRef.context.resources.getDimensionPixelSize(id)
     }
 }

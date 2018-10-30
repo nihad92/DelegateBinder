@@ -8,29 +8,29 @@ import android.view.View
 import kotlin.reflect.KProperty
 import android.support.v4.app.Fragment as V4Fragment
 
-open class BindView<T : View?>(@IdRes protected val id: Int) : BindLazy<T>() {
-    override fun getValue(thisRef: Fragment, property: KProperty<*>): T {
-        createInitializer(thisRef, { thisRef.view.findViewById<T>(id) })
-        return value
+open class BindView<T : View?>(@IdRes protected val id: Int) : Binder<T>() {
+    override fun getValue(thisRef: Fragment,
+                          property: KProperty<*>): T {
+        return thisRef.view.findViewById<T>(id)
     }
 
-    override fun getValue(thisRef: V4Fragment, property: KProperty<*>): T {
-        createInitializer(thisRef, { thisRef.view!!.findViewById<T>(id) })
-        return value
+    override fun getValue(thisRef: V4Fragment,
+                          property: KProperty<*>): T {
+        return thisRef.view!!.findViewById<T>(id)
     }
 
-    override operator fun getValue(thisRef: Activity, property: KProperty<*>): T {
-        createInitializer(thisRef, { thisRef.findViewById<T>(id) })
-        return value
+    override operator fun getValue(thisRef: Activity,
+                                   property: KProperty<*>): T {
+        return thisRef.findViewById<T>(id)
     }
 
-    override operator fun getValue(thisRef: View, property: KProperty<*>): T {
-        createInitializer(thisRef, { thisRef.findViewById<T>(id) })
-        return value
+    override operator fun getValue(thisRef: View,
+                                   property: KProperty<*>): T {
+        return thisRef.findViewById<T>(id)
     }
 
-    override operator fun getValue(thisRef: Dialog, property: KProperty<*>): T {
-        createInitializer(thisRef, { thisRef.findViewById<T>(id) })
-        return value
+    override operator fun getValue(thisRef: Dialog,
+                                   property: KProperty<*>): T {
+        return thisRef.findViewById<T>(id)
     }
 }

@@ -10,29 +10,29 @@ import android.view.View
 import kotlin.reflect.KProperty
 import android.support.v4.app.Fragment as V4Fragment
 
-open class BindBitmap(@DrawableRes protected val id: Int) : BindLazy<Bitmap>() {
-    override fun getValue(thisRef: Fragment, property: KProperty<*>): Bitmap {
-        createInitializer(thisRef, { BitmapFactory.decodeResource(thisRef.resources, id) })
-        return value
+open class BindBitmap(@DrawableRes protected val id: Int) : Binder<Bitmap>() {
+    override fun getValue(thisRef: Fragment,
+                          property: KProperty<*>): Bitmap {
+        return BitmapFactory.decodeResource(thisRef.resources, id)
     }
 
-    override fun getValue(thisRef: V4Fragment, property: KProperty<*>): Bitmap {
-        createInitializer(thisRef, { BitmapFactory.decodeResource(thisRef.resources, id) })
-        return value
+    override fun getValue(thisRef: V4Fragment,
+                          property: KProperty<*>): Bitmap {
+        return BitmapFactory.decodeResource(thisRef.resources, id)
     }
 
-    override operator fun getValue(thisRef: Activity, property: KProperty<*>): Bitmap {
-        createInitializer(thisRef, { BitmapFactory.decodeResource(thisRef.resources, id) })
-        return value
+    override operator fun getValue(thisRef: Activity,
+                                   property: KProperty<*>): Bitmap {
+        return BitmapFactory.decodeResource(thisRef.resources, id)
     }
 
-    override operator fun getValue(thisRef: View, property: KProperty<*>): Bitmap {
-        createInitializer(thisRef, { BitmapFactory.decodeResource(thisRef.resources, id) })
-        return value
+    override operator fun getValue(thisRef: View,
+                                   property: KProperty<*>): Bitmap {
+        return BitmapFactory.decodeResource(thisRef.resources, id)
     }
 
-    override operator fun getValue(thisRef: Dialog, property: KProperty<*>): Bitmap {
-        createInitializer(thisRef, { BitmapFactory.decodeResource(thisRef.context.resources, id) })
-        return value
+    override operator fun getValue(thisRef: Dialog,
+                                   property: KProperty<*>): Bitmap {
+        return BitmapFactory.decodeResource(thisRef.context.resources, id)
     }
 }
